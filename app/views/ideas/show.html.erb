@@ -1,0 +1,28 @@
+<p></p>
+<a href="/ideas">Bright Ideas</a>
+<p></p>
+
+<fieldset>
+	<legend><a href="/users/<%= @idea.user.id %>"><%= @idea.user.alias%></a> says: </legend><textarea rows="1" cols="50"><%= @idea.content %></textarea>
+</fieldset>
+
+<h3>People who liked this post</h3>
+<table class="table table-striped table-condensed">
+	<thead>
+		<tr>
+			<th class="fit">Alias</th>
+			<th class="fit">Name</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	<% @likes.each do |l| %>
+		
+		<tr>
+			<td class="fit"><%= l.user.alias %></td>
+			<td class="fit"><%= l.user.name %></td>
+		</tr>
+		
+	<% end %>
+	</tbody>
+</table>

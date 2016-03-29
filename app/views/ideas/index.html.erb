@@ -1,0 +1,37 @@
+<div class="container">
+	<h1>Hi <%= @user.alias %></h1>
+
+	<form action="/ideas" method="post">
+		<%= token_tag nil %>
+		<textarea rows="2" cols="50" name="idea[content]" placeholder="Post something here!"></textarea>
+		<button type="submit">Idea!</button>
+	</form>
+	<% @ideas.each do |i| %>
+	----------------------
+		<label><a href="/users/<%= i.user.id %>"><%= i.user.alias %></a> says:</label>
+		<p><%= i.content %></p>
+		<h4><a href="/ideas/<%= i.id%>"><%= i.likes.count %> likes</a></h4>
+		<% if i.users_liked.include?(current_user) %>
+			<form action='/likes/<%= i.find_like_id current_user%>' method='post'>
+					<%= token_tag nil %>
+				<input type='hidden' name='_method' value='delete'>
+					
+				<input type='submit' value='Unlike'>
+			</form>
+		<% else %> 
+			<form action='/likes' method='post'>
+			    <%= token_tag nil %>
+			    <input type='hidden' name='idea_id' value='<%= i.id %>'>
+			    <input type='submit' value='Like'>
+			</form>
+		<% end %>  
+
+		<% if current_user == i.user %>
+			<form action="/ideas/<%= i.id %>" method="post">
+				<%= token_tag nil %>
+				<input type="hidden" name="_method" value="delete" />
+				<button type="submit">Delete</button>
+			</form>
+		<% end %>
+	<% end %>
+</div>

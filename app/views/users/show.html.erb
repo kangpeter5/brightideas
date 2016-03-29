@@ -1,0 +1,22 @@
+<p></p>
+<a href="/ideas">Bright Ideas</a>
+<p></p>
+<div class="container">
+	<p>
+		<label>Name: <%= @user.name %></label>
+	</p>
+	<p>
+		<label>Alias: <%= @user.alias %></label>
+	</p>
+	<p>
+		<label>Email: <%= @user.email %></label>
+	</p>
+	<p></p>
+	<p>------------------------</p>
+	<p>
+		<label>Total Number of Ideas: <%= @user.ideas.count%></label>
+	</p>
+	<p>
+		<label>Total Number of Likes: <%= @user.likes.count %></label>
+	</p>
+</div>
